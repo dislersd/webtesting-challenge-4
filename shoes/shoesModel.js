@@ -19,6 +19,7 @@ async function update(id, changes) {
   await db("shoes")
     .where({ id })
     .update(changes);
+  return db("shoes").where({ id });
 }
 
 async function remove(id) {
@@ -32,5 +33,7 @@ async function getAll() {
 }
 
 async function findById(id) {
- return await db('shoes').where({id}).first();
+  return await db("shoes")
+    .where({ id })
+    .first();
 }
