@@ -18,11 +18,26 @@ describe("shoes model", () => {
   });
   describe("delete", () => {
     it("should delete 1 shoe", async () => {
-      Shoes.insert({name: 'shoe'});
+      Shoes.insert({ name: "shoe" });
       Shoes.remove(1);
       const shoes = await db("shoes");
       expect(shoes).toHaveLength(0);
     });
-    it("should delete correct shoe", async () => {});
+    it("should delete correct shoe", async () => {
+      await Shoes.insert({ name: "shoe" });
+      await Shoes.insert({ name: "sandal" });
+      Shoes.remove(1);
+      const shoes = await db("shoes");
+      expect(shoes[0]).toEqual({ id: 2, name: "sandal" });
+    });
+    it.only("should delete correct shoe", async () => {
+      await Shoes.insert({ name: "shoe" });
+      await Shoes.insert({ name: "sandal" });
+      await Shoes.insert({ name: "jordans" });
+      Shoes.remove(2);
+      const shoes = await db("shoes");
+      console.log(shoes);
+      expect(shoes).not.toContainEqual({ id: 2, name: "sandal" })
+    });
   });
 });
