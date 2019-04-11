@@ -1,9 +1,12 @@
-const express = require('express');
+const express = require("express");
 const server = express();
-server.use(express.json())
+const shoesRouter = require("../shoes/shoesRouter.js");
 
-server.get('/', async (req, res) => {
-  res.status(200).send('Hello World')
+server.use(express.json());
+server.use("/shoes", shoesRouter);
+
+server.get("/", async (req, res) => {
+  res.status(200).send("Hello World");
 });
 
 module.exports = server;

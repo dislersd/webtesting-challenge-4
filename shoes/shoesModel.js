@@ -8,25 +8,29 @@ module.exports = {
   findById
 };
 
-async function insert(hobbit) {
-  const [id] = await db("hobbits").insert(hobbit);
-  return db("hobbits")
+async function insert(shoe) {
+  const [id] = await db("shoes").insert(hobbit);
+  return db("shoes")
     .where({ id })
     .first();
 }
 
 async function update(id, changes) {
-  return null;
+  await db("shoes")
+    .where({ id })
+    .update(changes);
 }
 
-function remove(id) {
-  return null;
+async function remove(id) {
+  await db("shoes")
+    .where({ id })
+    .del();
 }
 
-function getAll() {
-  return db("hobbits");
+async function getAll() {
+  return await db("shoes");
 }
 
-function findById(id) {
-  return null;
+async function findById(id) {
+ return await db('shoes').where({id}).first();
 }
