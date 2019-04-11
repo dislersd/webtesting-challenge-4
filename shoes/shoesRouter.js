@@ -1,30 +1,29 @@
 const router = require("express").Router();
-
 const db = require('./shoesModel.js');
 
 router.get("/", async (req, res) => {
   try {
-    const projects = await db.get();
-    res.status(200).json(projects);
+    const shoes = await db.getAll();
+    res.status(200).json(shoes);
   } catch (error) {
-    res.status(500).json({ message: "error getting projects" });
+    res.status(500).json({ message: "error getting shoes" });
   }
 });
 
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const project = await db.get(id);
-    res.status(200).json(project);
+    const shoe = await db.findById(id);
+    res.status(200).json(shoe);
   } catch (error) {
-    res.status(500).json({ message: "error retrieving project" });
+    res.status(500).json({ message: "error retrieving shoe" });
   }
 });
 
 router.post("/", async (req, res) => {
   try {
-    const newPost = await db.insert(req.body);
-    res.status(201).json(newPost);
+    const newShoe = await db.insert(req.body);
+    res.status(201).json(newShoe);
   } catch (error) {
     res.status(500).json({ message: "error posting" });
   }

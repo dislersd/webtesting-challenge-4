@@ -13,7 +13,8 @@ describe("server", () => {
     });
     describe("POST", () => {
       it("responds 201", async () => {
-        const res = await request(server).post("/shoes");
+
+        const res = await request(server).post("/shoes").send({name: 'slippers'});
         expect(res.status).toBe(201);
       });
     });
